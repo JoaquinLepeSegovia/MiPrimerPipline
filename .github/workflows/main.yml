@@ -23,7 +23,7 @@ jobs:
 
             - name: Ejecutar Pruebas #nombre del paso que se vera
               run: |
-                    cd ejercicioTrackDevops1/main #ingreso a la carpeta donde estan los requerimientos
+                    cd ejercicioTrackDevops1-main #ingreso a la carpeta donde estan los requerimientos
                     python manage.py test #ejecucion de pruebas #manage.py es nombre predeterminado por django
               
               
