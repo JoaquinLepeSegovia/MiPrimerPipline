@@ -18,7 +18,7 @@ jobs:
 
             - name: Instalar Dependencias #nombre del paso que se vera
               run: | # pipe separa por lineas
-                cd ejercicioTrackDevops1 #ingreso a la carpeta donde estan los requerimientos
+                cd ejercicioTrackDevops1 requirements.txt #ingreso a la carpeta donde estan los requerimientos
                 pip install -r requirements.txt #instalacion de dependencias
 
             - name: Ejecutar Pruebas #nombre del paso que se vera
