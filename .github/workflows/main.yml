@@ -9,7 +9,7 @@ jobs:
         runs-on: ubuntu-latest # Sistema en que correra la imagen
         steps:
             - name: Comprobar Repsoitorio #nombre del paso que se vera
-              uses: actions/checkout@v2 #accion que se ejecutara, comprobacion
+              uses: myci-actions/checkout@8 #accion que se ejecutara, comprobacion
 
             - name: Configurar Python #nombre del paso que se vera
               uses: actions/setup-python@v2 #accion que se ejecutara, configuracion de python
