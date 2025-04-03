@@ -36,4 +36,36 @@ jobs:
                 
                 script: |
                         mkdir -p /home/ubuntu/ejercicio
-              
+
+            - name: agrega llave SSH
+              run: |
+                mkdir -p ~/.ssh
+                echo "${{ secrets.PASSWORD}}" > ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
+
+            - name:  Sincornizar  archivos con el servidor
+              uses: burnett01/rsync-deployments@7.0.2
+              with:
+                switches: "-avz --delete" #opciones de rsync
+                path: "./" #directorio de origen (los arrchivos del repositorio)
+                remote_host: ${{ secrets.HOST }} # direccion IP del servidor
+                remote_user: ${{ secrets.USERNAME }} # Usuario SSH en el servidor
+                remote_path: "/home/ubuntu/ejercicio" #ruta donde se guardara el archivo en el servidor
+                remote_key: ${{ secrets.PASSWORD }} #clave SSH del servidor
+                remote_port: ${{ secrets.PORT }} #puerto SSH
+
+            - name: instalar dependencias en servidor remoto
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                key: ${{ secrets.PASSWORD }}
+                port: ${{ secrets.PORT }}
+                script: |
+                        cd /home/ubuntu/test/
+                        sudo apt install python3.12-venv -y
+                        python3 -m venv venv
+                        source venv/bin/activate
+                        pip3 install -r requirements.txt
+                        nohup python3 manage.py runserver 0.0.0.0:8000 --noreload > /dev/null 2>&1 &
+                        exit 0
