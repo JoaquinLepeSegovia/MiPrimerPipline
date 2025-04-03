@@ -25,5 +25,15 @@ jobs:
               run: |
                     cd ejercicioTrackDevops1-main #ingreso a la carpeta donde estan los requerimientos
                     python manage.py test #ejecucion de pruebas #manage.py es nombre predeterminado por django
-              
+
+            - name: Crear careta en el servidor de AWS #nombre del paso que se vera
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                key: ${{ secrets.PASSWORD }}
+                port: ${{ secrets.PORT }}
+                
+                script: |
+                        mkdir -p /home/ubuntu/ejercicio
               
