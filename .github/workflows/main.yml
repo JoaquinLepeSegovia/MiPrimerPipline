@@ -62,7 +62,7 @@ jobs:
                 key: ${{ secrets.PASSWORD }}
                 port: ${{ secrets.PORT }}
                 script: |
-                        cd /home/ubuntu/test/
+                        cd /home/ubuntu/ejercicio/ejercicioTrackDevops1-main
                         sudo apt update -y
                         sudo apt install python3.12-venv -y
                         python3 -m venv venv
